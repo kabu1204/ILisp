@@ -4,13 +4,12 @@ ILisp is a toy Lisp REPL with C++ Runtime.
 ILisp can act as a simple calculator, equipped with "if" "define" "begin" keyword.
 
 ## Requirements
-### Linux/macOS
+[google/re2](https://github.com/google/re2) for matching numbers and floats.
+
+[CMake](https://cmake.org/) or [XMake](xmake.io) for building the project.
+
+### Linux/macOS specific
 [ediline](https://github.com/troglobit/editline) for cli interaction.
-
-[CMake](https://cmake.org/) or [XMake](xmake.io) for building the project.
-
-### Windows
-[CMake](https://cmake.org/) or [XMake](xmake.io) for building the project.
 
 ## Build
 ### CMake
@@ -35,16 +34,11 @@ xmake run ilisp
 ![example0](pics/example0.png)
 
 ![example1](pics/example1.png)
-$$
-\begin{align}
-&sin(\frac{\pi}{2})\\
-&\left\{\begin{aligned}
-&\log_{10}{100}\quad &if\ 1>2\\
-&\log_{2}{8}\quad &otherwise
-\end{aligned}\right.\\
-&\sqrt{sin(\frac{\pi}{2})+|cos(\pi)|}
-\end{align}
-$$
+![](pics/16382899516056.jpg)
+![](pics/16382899776863.jpg)
+![](pics/16382899903963.jpg)
+
+
 
 ## REF
 [SICP](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
