@@ -1,0 +1,6 @@
+/cmake-build-debug/
+/.xmake/
+/build/
+/cmake-build-release/
+/cmake-build-relwithdebinfo/
+/xmake-build/
