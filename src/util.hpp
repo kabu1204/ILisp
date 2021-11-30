@@ -29,7 +29,7 @@ std::printf(__VA_ARGS__);}while(0)
  * @brief a simple of data structure stack
  */
 template<class T>
-struct Stack {
+volatile struct Stack {
     T* stack_space; T* sp; uint32_t capacity;
     Stack(size_t stack_size=MAX_STACK_SIZE): capacity(stack_size / sizeof(T)), stack_space((T*)malloc(capacity*sizeof(T))), sp(stack_space){
         dd("stack_space:%p\n",stack_space);
@@ -51,7 +51,7 @@ struct Stack {
         free(stack_space); stack_space=t_space; sp=tp;
     }
     Stack(const Stack &x) { capacity = x.capacity; stack_space=(T*)malloc(capacity * sizeof(T)); sp=stack_space; T* sp_x=x.stack_space;
-        for(int i=0;i<x.where();++i) *(sp++)=*(sp_x++); dd("copied\n");}
+        for(int i=0;i<x.where();++i) *(sp++)=*(sp_x++);}
     ~Stack(){clean();}
 };
 
@@ -68,7 +68,6 @@ Stack<std::string> split(const std::string& str, const std::string& delim) {
         ret.push(std::move(s));
         p = strtok(nullptr, d);
     }
-    dd("size of ret:%d\n", ret.size());
     return ret;
 }
 
@@ -79,36 +78,8 @@ Stack<std::string> tokenize(std::string str){
         if(str[i]=='(') {str.insert(i+1,1,' '); continue;}
         if(str[i]==')') {str.insert(i,1,' '); continue;}
     }
-
-    dd("%s\n", str.c_str());
-
     Stack<std::string> tokens_split_by_spc = split(str, " ");
-
     Stack<std::string> tokens(tokens_split_by_spc);
-    dd("size of token:%d\n",tokens.size());
     return tokens;
 }
-
-int parse(Stack<std::string> str_v){
-    std::vector<std::string> parse_stack;
-    std::string str;
-    while(!str_v.empty()){
-        str_v.pop(str);
-        if(str==")"){
-            std::vector<std::string> list;
-            str_v.pop(str);
-            while(str!="(" && !str_v.empty()){
-                list.push_back(str);
-                str_v.pop(str);
-            }
-            std::string symbol=list.back();
-            dd("Symbol:%s\n", symbol.c_str());
-            if(symbol=="+"){
-                assert(list.size()==3);
-                return std::stoi(list[0])+std::stoi(list[1]);
-            }
-        }
-    }
-}
-
 #endif //ILISP_UTIL_HPP
